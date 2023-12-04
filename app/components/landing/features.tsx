@@ -25,13 +25,13 @@ export const Features: React.FC = () => {
     },
   ];
   return (
-    <section>
-      <div className="relative max-w-6xl px-4 mx-auto sm:px-6">
+    <section className="bg-slate-50 dark:bg-transparent">
+      <div className="relative max-w-6xl px-4 mx-auto sm:px-6 ">
         <div
           className="absolute inset-0 -z-10 -mx-28 rounded-t-[3rem] pointer-events-none overflow-hidden"
           aria-hidden="true"
         >
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -z-10">
+          <div className="hidden dark:block dark:absolute top-0 left-1/2 -translate-x-1/2 -z-10">
             <img
               src={GlowTop}
               className="max-w-none"
@@ -57,21 +57,21 @@ export const Features: React.FC = () => {
                     Don't drown in alerts
                   </div>
                 </div>
-                <h3 className="pb-3 text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
+                <h3 className="pb-3 text-4xl font-bold dark:text-transparent bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
                   Get Paid, Fast.
                 </h3>
-                <p className="mb-8 text-lg text-zinc-400">
+                <p className="mb-8 text-lg dark:text-zinc-400">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores est maiores accusantium accusamus rem sapiente soluta fuga incidunt temporibus nemo, quibusdam pariatur voluptate ea laudantium, debitis repellendus esse modi aliquid?
                 </p>
                 <dl className="max-w-xl grid grid-cols-1 gap-4 lg:max-w-none">
                   {features.map((feature) => (
                     <div
                       key={feature.name}
-                      className="px-2 py-1 rounded group hover:bg-zinc-100 duration-500"
+                      className="px-2 py-1 rounded group hover:bg-muted dark:hover:bg-zinc-100 duration-500"
                     >
                       <div className="flex items-center mb-1 space-x-2 ">
-                        <feature.icon className="w-4 h-4 shrink-0 text-zinc-300 group-hover:text-zinc-950 duration-500" />
-                        <h4 className="font-medium text-zinc-50 group-hover:text-zinc-950 duration-500">
+                        {/* <feature.icon className="w-4 h-4 shrink-0 dark:text-zinc-300 group-hover:text-zinc-950 duration-500" /> */}
+                        <h4 className="font-medium dark:text-zinc-50 group-hover:text-zinc-950 duration-500">
                           {feature.name}
                         </h4>
                       </div>

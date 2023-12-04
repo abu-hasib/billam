@@ -22,11 +22,11 @@ export const Cta: React.FC = () => {
           {/* Content */}
           <div className="max-w-3xl mx-auto text-center">
             <div>
-              <div className="inline-flex pb-3 font-medium text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-200">
+              <div className="inline-flex pb-3 font-medium dark:text-transparent bg-clip-text bg-gradient-to-r from-primary-500 to-primary-200">
                 The easiest way to track events
               </div>
             </div>
-            <h2 className="pb-4 text-4xl font-extrabold text-transparent  bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
+            <h2 className="pb-4 text-4xl font-extrabold dark:text-transparent  bg-clip-text bg-gradient-to-r from-zinc-200/60 via-zinc-200 to-zinc-200/60">
               Take control of your SaaS
             </h2>
             <p className="mb-8 text-lg text-zinc-400">Ingest your events within 60 seconds.</p>
