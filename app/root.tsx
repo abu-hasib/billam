@@ -1,6 +1,7 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -11,22 +12,49 @@ import {
 } from "@remix-run/react";
 import styles from "./tailwind.css";
 import { themeSessionResolver } from "./sessions.server";
-import { PreventFlashOnWrongTheme, ThemeProvider, useTheme } from "remix-themes";
+import {
+  PreventFlashOnWrongTheme,
+  ThemeProvider,
+  useTheme,
+} from "remix-themes";
 import clsx from "clsx";
+import { rootAuthLoader } from "@clerk/remix/ssr.server";
+import {
+  ClerkApp,
+  ClerkErrorBoundary,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/remix";
+import { ModeToggle } from "./components/mode-toggle";
+import Navbar from "./components/top-bar";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
-export async function loader({ request }: LoaderFunctionArgs) {
-  const { getTheme } = await themeSessionResolver(request);
-  return {
-    theme: getTheme(),
-  };
+export async function loader(args: LoaderFunctionArgs) {
+  return rootAuthLoader(args, async ({ request }) => {
+    const { sessionId, userId, getToken } = request.auth;
+    const { getTheme } = await themeSessionResolver(request);
+
+    // fetch data
+    return { theme: getTheme() };
+  });
 }
 
-export default function AppWithProviders() {
+export const ErrorBoundary = ClerkErrorBoundary();
+
+// export async function loader(args: LoaderFunctionArgs) {
+//   const { getTheme } = await themeSessionResolver(args.request);
+//   return {
+//     theme: getTheme(),
+//     rootAuthLoader: rootAuthLoader(args),
+//   };
+// }
+
+function AppWithProviders() {
   const data = useLoaderData<typeof loader>();
   return (
     <ThemeProvider specifiedTheme={data.theme} themeAction="/action/set-theme">
@@ -36,18 +64,19 @@ export default function AppWithProviders() {
 }
 
 export function App() {
-  const data = useLoaderData<typeof loader>()
-  const [theme] = useTheme()
+  const data = useLoaderData<typeof loader>();
+  const [theme] = useTheme();
   return (
     <html lang="en" className={clsx(theme)}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
-        <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)}/>
+        <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
       </head>
       <body>
+        <Navbar />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
@@ -56,3 +85,5 @@ export function App() {
     </html>
   );
 }
+
+export default ClerkApp(AppWithProviders);
