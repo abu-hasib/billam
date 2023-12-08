@@ -1,7 +1,6 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import {
-  Link,
   Links,
   LiveReload,
   Meta,
@@ -19,15 +18,7 @@ import {
 } from "remix-themes";
 import clsx from "clsx";
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
-import {
-  ClerkApp,
-  ClerkErrorBoundary,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/remix";
-import { ModeToggle } from "./components/mode-toggle";
-import Navbar from "./components/top-bar";
+import { ClerkApp, ClerkErrorBoundary } from "@clerk/remix";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
@@ -76,7 +67,6 @@ export function App() {
         <Links />
       </head>
       <body>
-        <Navbar />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
