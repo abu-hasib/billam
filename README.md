@@ -53,18 +53,14 @@ Here is what you need to be able to run billam.
    git clone https://github.com/abu-hasib/billam.git
    ```
    You can also fork (https://github.com/abu-hasib/billam/fork)
-
-2. Navigate to the project's root directory where the `package.json` and `package-lock.json` files are located.
    
-   `cd Frontend/cubeseed_login `
-   
-3. Install the project dependencies
+2. Install the project dependencies
    
    ```sh
    npm install
    ```
    
-4. Run the development server
+3. Run the development server
    
 
 ```bash
@@ -78,10 +74,3 @@ This starts your app in development mode, rebuilding assets on file changes.
 
 ## Contributing
  All new features, enhancements, and bug fixes must be added as an issue before opening a PR. And make sure your PR information is well-detailed.
-
-## Happy coding
-
-
-
-
-- `public/build/`
